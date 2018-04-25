@@ -24,10 +24,17 @@ const double COEFFICIENT_OF_RESTITUTION = 0.2;
 } // namespace
 
 // MARK: - Variables
-static double acceleration[3 * ARRAY_SIZE];
-static double position[3 * ARRAY_SIZE];
-static double velocity[3 * ARRAY_SIZE];
-static int particleTypes[ARRAY_SIZE];
+double acceleration[3 * ARRAY_SIZE];
+double position[3 * ARRAY_SIZE];
+double velocity[3 * ARRAY_SIZE];
+int particleTypes[ARRAY_SIZE];
+double pressure[ARRAY_SIZE];
+double numberDensity[ARRAY_SIZE];
+int boundaryCondition[ARRAY_SIZE];
+double sourceTerm[ARRAY_SIZE];
+int flagBoundaryCondition[ARRAY_SIZE];
+double cofficientMatrix[ARRAY_SIZE * ARRAY_SIZE];
+double minimumPressure[ARRAY_SIZE];
 
 // MARK: - Particle class
 
@@ -302,7 +309,7 @@ void Particle::calcViscosity() {
   }
 }
 
-/// ���������������������������際に一度仮で動かしてみる部分
+/// 一度仮で動かしてみる部分
 void Particle::moveParticle() {
 
   for (int i = 0; i < numberOfParticles; i++) {
@@ -400,7 +407,23 @@ void Particle::calcPressure() {
   setMinimumPressure();
 }
 
-void Particle::calcDensity() {}
+void Particle::calcDensity() {
+  for (int i = 0; i < numberOfParticles; i++) {
+    numberDensity[i] = 0.0;
+    if (particleTypes[i] == GHOST)
+      continue;
+    for (int j = 0; j < numberOfParticles; j++) {
+      if (j == i || particleTypes[j] == GHOST)
+        continue;
+      double xij = position[j * 3] - position[i * 3];
+      double yij = position[j * 3 + 1] - position[i * 3 + 1];
+      double zij = position[j * 3 + 2] - position[i * 3 + 2];
+      double distance2 = pow(xij, 2) + pow(yij, 2) + pow(zij, 2);
+      double distance = sqrt(distance2);
+      NumberDensity[i] += weight(distance, reNumDensity);
+    }
+  }
+}
 
 void Particle::setBoundaryCond() {}
 
