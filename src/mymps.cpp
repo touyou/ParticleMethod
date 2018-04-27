@@ -6,6 +6,11 @@ namespace Mps {
 const int arraySize = 5000;
 const double particleDistance = 0.025;
 const double eps = 0.01 * particleDistance;
+const double reNumberDensity = 2.1 * particleDistance;
+const double reGradient = 2.1 * particleDistance;
+const double reLaplacian = 3.1 * particleDistance;
+const double fluidDensity = 1000.0;
+const double collisionDistance = 0.5 * particleDistance;
 
 // Type
 enum Type { ghost, fluid, wall, dummy };
@@ -41,6 +46,12 @@ public:
 // variable
 Particle particle[arraySize];
 int numberOfParticles = 0;
+int fileNumber;
+double simTime;
+double n0NumberDensity;
+double n0Gradient;
+double n0Laplacian;
+double lambda;
 
 bool judgeRegionThree(double x, double y, double z, double xFact, double yFact,
                       double zFact, double xOffset, double yOffset,
@@ -95,6 +106,31 @@ void initParticle() {
   }
   numberOfParticles = i;
 }
+
+void initConstant() {
+  n0NumberDensity = n0Gradient = n0Laplacian = lambda = 0.0;
+  for (int iX = -4; iX < 5; iX++) {
+    for (int iY = -4; iY < 5; iY++) {
+      for (int iZ = -4; iZ < 5; iZ++) {
+        if (iX == 0 && iY == 0 && iZ == 0)
+          continue;
+        Vector distj =
+            Vector(particleDistance * (double)iX, particleDistance * (double)iY,
+                   particleDistance * (double)iZ);
+        n0NumberDensity += weight(distj.distance(), reNumberDensity);
+        n0Gradient += weight(distj.distance(), reGradient);
+        n0Laplacian += weight(distj.distance(), reLaplacian);
+        lambda += distj.distance2() * weight(distance, reLaplacian);
+      }
+    }
+  }
+  lambda /= n0Laplacian;
+
+  fileNumber = 0;
+  simTime = 0.0;
+}
+
+double weight(double distance, double re) {}
 
 }; // namespace Mps
 
