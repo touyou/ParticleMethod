@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include "mymps.h"
 
 namespace Mps {
 
@@ -20,87 +20,6 @@ const double relaxationCoefficient = 0.2;
 const double compressibility = 0.45e-9;
 const int outputInterval = 2;
 const double finishTime = 2.0;
-
-// Type
-enum Type { ghost, fluid, wall, dummy };
-enum Condition { immovable, surface, inner };
-enum CheckCondition { ignored, connected, noconnect, checked };
-
-// Original Vector Structure
-class Vector {
-public:
-  double x, y, z;
-  Vector() : x(0.0), y(0.0), z(0.0) {}
-  Vector(double x, double y, double z) : x(x), y(y), z(z) {}
-  /// operator
-  Vector &operator+=(const Vector &v) {
-    x += v.x;
-    y += v.y;
-    z += v.z;
-    return *this;
-  }
-  Vector &operator-=(const Vector &v) {
-    x -= v.x;
-    y -= v.y;
-    z -= v.z;
-    return *this;
-  }
-  Vector &operator*=(double r) {
-    x *= r;
-    y *= r;
-    z *= r;
-    return *this;
-  }
-  /// Some Method
-  double distance2(Vector *v2) {
-    return pow(x - v2->x, 2) + pow(y - v2->y, 2) + pow(z - v2->z, 2);
-  }
-  double distance(Vector *v2) { return sqrt(distance(v2)); }
-  double size2() { return x * x + y * y + z * z; }
-  double size() { return sqrt(size2()); }
-};
-
-// Particle Structure
-class Particle {
-public:
-  Vector position;
-  Vector velocity;
-  Vector acceleration;
-  double pressure, minPressure;
-  double numberDensity;
-  Type type;
-  Condition boundaryCondition;
-  double sourceTerm;
-  CheckCondition flagCondition;
-
-  Particle()
-      : position(Vector(0, 0, 0)), velocity(Vector(0, 0, 0)),
-        acceleration(Vector(0, 0, 0)), pressure(0.0), minPressure(0.0),
-        numberDensity(0.0), type(wall), boundaryCondition(immovable),
-        sourceTerm(0.0), flagCondition(ignored) {}
-};
-
-// operator
-
-Vector operator+(const Vector &v1, const Vector &v2) {
-  return Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-}
-
-Vector operator-(const Vector &v1, const Vector &v2) {
-  return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-}
-
-Vector operator*(const Vector &v1, double r) {
-  return Vector(v1.x * r, v1.y * r, v1.z * r);
-}
-
-Vector operator*(const Vector &v1, const Vector &v2) {
-  return Vector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
-}
-
-Vector operator/(const Vector &v1, double r) {
-  return Vector(v1.x / r, v1.y / r, v1.z / r);
-}
 
 // variable
 Particle particle[arraySize];
@@ -132,9 +51,9 @@ void checkBoundaryCondition();
 void increaseDiagonalTerm();
 void setSourceTerm();
 
-bool judgeRegionThree(double x, double y, double z, double xFact, double yFact,
+auto judgeRegionThree(double x, double y, double z, double xFact, double yFact,
                       double zFact, double xOffset, double yOffset,
-                      double zOffset, double yLowOffset = 0.0) {
+                      double zOffset, double yLowOffset = 0.0) -> bool {
 
   return x > -xFact * particleDistance + eps &&
          x <= xOffset + xFact * particleDistance + eps &&
@@ -143,7 +62,7 @@ bool judgeRegionThree(double x, double y, double z, double xFact, double yFact,
          z <= zOffset + zFact * particleDistance + eps;
 }
 
-double weight(double distance, double re) {
+auto weight(double distance, double re) -> double {
   return distance >= re ? 0.0 : (re / distance) - 1.0;
 }
 
@@ -217,7 +136,7 @@ void initConstant() {
 void simulate() {
   auto timeStep = 0;
   writeData();
-  printf("number of particles: %d\n", numberOfParticles);
+  printf("Number of particles: %d\n", numberOfParticles);
 
   while (1) {
     calcGravity();
@@ -230,7 +149,8 @@ void simulate() {
     timeStep++;
     simTime += dt;
     if (timeStep % outputInterval == 0) {
-      printf("TimeStepNumber: %4d Time: %lf(s)\n", timeStep, simTime);
+      printf("TimeStepNumber: %4d Time: %lf(s) TimeStamp: %lf(s)\n", timeStep,
+             simTime);
       writeData();
     }
 
@@ -561,7 +481,7 @@ void writeData() {
   FILE *fp;
   char fileName[1024];
 
-  sprintf(fileName, "particle_%04d.vtu", fileNumber);
+  sprintf(fileName, "mpsdata/particle_%04d.vtu", fileNumber);
   fp = fopen(fileName, "w");
   fprintf(fp, "<?xml version='1.0' encoding='UTF-8'?>\n");
   fprintf(fp, "<VTKFile xmlns='VTK' byte_order='LittleEndian' version='0.1' "
@@ -631,7 +551,12 @@ int main(int argc, char **argv) {
   printf("*** INITIALIZE PARTICLE ***\n");
   Mps::initConstant();
   printf("*** INITIALIZE CONSTANT ***\n*** START MAIN LOOP ***\n");
+  auto timerStart = std::chrono::system_clock::now();
   Mps::simulate();
+  auto timerEnd = std::chrono::system_clock::now();
+  printf("Total: %13.6lf sec\n",
+         std::chrono::duration_cast<std::chrono::seconds>(timerEnd - timerStart)
+             .count());
   printf("*** END ***\n\n");
   return 0;
 }
