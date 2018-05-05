@@ -187,6 +187,7 @@ void makeBucket() {
 }
 
 void viscosityTerm() {
+#pragma omp parallel for schedule(dynamic, 64)
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == fluid) {
       auto acceleration = Vector();
@@ -220,6 +221,7 @@ void viscosityTerm() {
 }
 
 void updateParticle1() {
+#pragma omp parallel for
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == fluid) {
       particle[i].velocity += particle[i].acceleration * dt;
@@ -231,6 +233,7 @@ void updateParticle1() {
 }
 
 void checkCollision() {
+#pragma omp parallel for schedule(dynamic, 64)
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == fluid) {
       auto mi = dns[particle[i].type];
@@ -271,6 +274,7 @@ void checkCollision() {
 }
 
 void makePressure() {
+#pragma omp parallel for schedule(dynamic, 64)
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type != ghost) {
       auto position = particle[i].position;
@@ -302,6 +306,7 @@ void makePressure() {
 }
 
 void pressureGradTerm() {
+#pragma omp parallel for schedule(dynamic, 64)
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == fluid) {
       auto acceleration = Vector();
@@ -353,6 +358,7 @@ void pressureGradTerm() {
 }
 
 void updateParticle2() {
+#pragma omp parallel for
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == fluid) {
       particle[i].velocity += particle[i].acceleration * dt;

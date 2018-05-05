@@ -33,10 +33,6 @@ public:
     return *this;
   }
   /// Some Method
-  auto distance2(const Vector &v2) -> double {
-    return pow(x - v2.x, 2) + pow(y - v2.y, 2) + pow(z - v2.z, 2);
-  }
-  auto distance(const Vector &v2) -> double { return sqrt(distance(v2)); }
   auto size2() -> double { return x * x + y * y + z * z; }
   auto size() -> double { return sqrt(size2()); }
   auto dot(const Vector &v2) -> double {
@@ -72,20 +68,13 @@ public:
   Vector position;
   Vector velocity;
   Vector acceleration;
-  double pressure, minPressure;
+  double pressure;
   double avgPressure;
-  double numberDensity;
   Type type;
-  Condition boundaryCondition;
-  double sourceTerm;
-  CheckCondition flagCondition;
 
   Particle()
       : position(Vector(0, 0, 0)), velocity(Vector(0, 0, 0)),
-        acceleration(Vector(0, 0, 0)), pressure(0.0), minPressure(0.0),
-        numberDensity(0.0), type(wall), boundaryCondition(immovable),
-        sourceTerm(0.0), flagCondition(ignored) {}
-
+        acceleration(Vector(0, 0, 0)), pressure(0.0), type(wall) {}
   ~Particle() = default;
 };
 }; // namespace Mps
