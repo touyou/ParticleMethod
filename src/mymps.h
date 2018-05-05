@@ -12,7 +12,7 @@ public:
   double x, y, z;
   Vector() : x(0.0), y(0.0), z(0.0) {}
   Vector(double x, double y, double z) : x(x), y(y), z(z) {}
-  ~Vector() {}
+  ~Vector() = default;
   /// operator
   Vector &operator+=(const Vector &v) {
     x += v.x;
@@ -26,19 +26,22 @@ public:
     z -= v.z;
     return *this;
   }
-  Vector &operator*=(double r) {
+  Vector &operator*=(const double r) {
     x *= r;
     y *= r;
     z *= r;
     return *this;
   }
   /// Some Method
-  auto distance2(Vector *v2) -> double {
-    return pow(x - v2->x, 2) + pow(y - v2->y, 2) + pow(z - v2->z, 2);
+  auto distance2(const Vector &v2) -> double {
+    return pow(x - v2.x, 2) + pow(y - v2.y, 2) + pow(z - v2.z, 2);
   }
-  auto distance(Vector *v2) -> double { return sqrt(distance(v2)); }
+  auto distance(const Vector &v2) -> double { return sqrt(distance(v2)); }
   auto size2() -> double { return x * x + y * y + z * z; }
   auto size() -> double { return sqrt(size2()); }
+  auto dot(const Vector &v2) -> double {
+    return x * v2.x + y * v2.y + z * v2.z;
+  }
 };
 
 // operator
@@ -51,7 +54,7 @@ Vector operator-(const Vector &v1, const Vector &v2) {
   return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 }
 
-Vector operator*(const Vector &v1, double r) {
+Vector operator*(const Vector &v1, const double r) {
   return Vector(v1.x * r, v1.y * r, v1.z * r);
 }
 
@@ -59,7 +62,7 @@ Vector operator*(const Vector &v1, const Vector &v2) {
   return Vector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
 }
 
-Vector operator/(const Vector &v1, double r) {
+Vector operator/(const Vector &v1, const double r) {
   return Vector(v1.x / r, v1.y / r, v1.z / r);
 }
 
@@ -83,6 +86,6 @@ public:
         numberDensity(0.0), type(wall), boundaryCondition(immovable),
         sourceTerm(0.0), flagCondition(ignored) {}
 
-  ~Particle() {}
+  ~Particle() = default;
 };
 }; // namespace Mps

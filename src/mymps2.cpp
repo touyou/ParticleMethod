@@ -33,7 +33,7 @@ const double distLimitRate = 0.9;
 const double collisionRate = 0.2;
 const Vector gravity = Vector(0.0, 0.0, -9.8);
 const double dt = 0.0005;
-const double finishTime = 1.0;
+const double finishTime = 2.0;
 
 /// variable
 
@@ -58,35 +58,16 @@ int dns[2], invDns[2];
 auto rlim = 0.0;
 auto col = 0.0;
 auto loopTime = 0;
-auto simTime = 0.0;
-auto pNum = 0;
+double simTime = 0.0;
 
 /// function
 
 auto weight(double dist, double re) { return (re / dist) - 1.0; }
 
-void bucketLoop(std::function<void(int)> func, const Vector &pos) {
-  auto ix = int((pos.x - minX) / dBucket) + 1;
-  auto iy = int((pos.y - minY) / dBucket) + 1;
-  auto iz = int((pos.z - minZ) / dBucket) + 1;
-  for (auto jz = iz - 1; jz <= iz + 1; jz++) {
-    for (auto jy = iy - 1; jy <= iy + 1; jy++) {
-      for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-        auto jb = jz * nBxyz + jy * nBx + jx;
-        auto j = bFst[jb];
-        while (j != -1) {
-          func(j);
-          j = nxt[j];
-        }
-      }
-    }
-  }
-}
-
 void checkParticle(int i) {
   if (particle[i].position.x > maxX || particle[i].position.x < minX ||
       particle[i].position.y > maxY || particle[i].position.y < minY ||
-      particle[i].position.z > maxZ || particle[i].position.z < minY) {
+      particle[i].position.z > maxZ || particle[i].position.z < minZ) {
     particle[i].type = ghost;
     particle[i].pressure = 0.0;
     particle[i].velocity = Vector();
@@ -138,6 +119,7 @@ void writeDat() {
 void analysisBucket() {
   r = particleDistance * 2.1;
   dBucket = r * (1.0 + courantNumber);
+  dBucketInv = 1.0 / dBucket;
   nBx = int((maxX - minX) * dBucketInv) + 3;
   nBy = int((maxY - minY) * dBucketInv) + 3;
   nBz = int((maxZ - minZ) * dBucketInv) + 3;
@@ -162,8 +144,9 @@ void setParameter() {
         if (dist2 <= r * r) {
           if (dist2 == 0.0)
             continue;
-          tnum += weight(sqrt(dist2), r);
-          tlambda += dist2 * weight(sqrt(dist2), r);
+          double dist = sqrt(dist2);
+          tnum += weight(dist, r);
+          tlambda += dist2 * weight(dist, r);
         }
       }
     }
@@ -182,6 +165,8 @@ void setParameter() {
   loopTime = 0;
   fileNumber = 0;
   simTime = 0.0;
+  printf("n0: %lf lambda: %lf\na1: %lf a2:%lf a3:%lf\n", n0, lambda, a1, a2,
+         a3);
 }
 
 void makeBucket() {
@@ -194,9 +179,9 @@ void makeBucket() {
   for (auto i = 0; i < numberOfParticles; i++) {
     if (particle[i].type == ghost)
       continue;
-    auto ix = int((particle[i].position.x - minX) / dBucket) + 1;
-    auto iy = int((particle[i].position.y - minY) / dBucket) + 1;
-    auto iz = int((particle[i].position.z - minZ) / dBucket) + 1;
+    auto ix = int((particle[i].position.x - minX) * dBucketInv) + 1;
+    auto iy = int((particle[i].position.y - minY) * dBucketInv) + 1;
+    auto iz = int((particle[i].position.z - minZ) * dBucketInv) + 1;
     auto ib = iz * nBxy + iy * nBx + ix;
     auto j = bLst[ib];
     bLst[ib] = i;
@@ -214,16 +199,16 @@ void viscosityTerm() {
       auto position = particle[i].position;
       auto velocity = particle[i].velocity;
 
-      auto ix = int((position.x - minX) / dBucket) + 1;
-      auto iy = int((position.y - minY) / dBucket) + 1;
-      auto iz = int((position.z - minZ) / dBucket) + 1;
+      auto ix = int((position.x - minX) * dBucketInv) + 1;
+      auto iy = int((position.y - minY) * dBucketInv) + 1;
+      auto iz = int((position.z - minZ) * dBucketInv) + 1;
       for (auto jz = iz - 1; jz <= iz + 1; jz++) {
         for (auto jy = iy - 1; jy <= iy + 1; jy++) {
           for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-            auto jb = jz * nBxyz + jy * nBx + jx;
+            auto jb = jz * nBxy + jy * nBx + jx;
             auto j = bFst[jb];
             while (j != -1) {
-              auto v = particle[j].position - position;
+              Vector v = particle[j].position - position;
               if (v.size2() < r * r) {
                 if (j != i && particle[j].type != ghost) {
                   auto w = weight(v.size(), r);
@@ -235,17 +220,6 @@ void viscosityTerm() {
           }
         }
       }
-      // bucketLoop(
-      //     [&](int j) {
-      //       Vector v = particle[j].position - position;
-      //       if (v.size2() < r * r) {
-      //         if (j != i && particle[j].type != ghost) {
-      //           auto w = weight(v.size(), r);
-      //           acceleration += (particle[j].velocity - velocity) * w;
-      //         }
-      //       }
-      //     },
-      //     position);
       particle[i].acceleration = acceleration * a1 + gravity;
     }
   }
@@ -269,20 +243,19 @@ void checkCollision() {
       auto position = particle[i].position;
       auto velocity = particle[i].velocity;
       particle[i].acceleration = particle[i].velocity;
-      auto ix = int((position.x - minX) / dBucket) + 1;
-      auto iy = int((position.y - minY) / dBucket) + 1;
-      auto iz = int((position.z - minZ) / dBucket) + 1;
+      auto ix = int((position.x - minX) * dBucketInv) + 1;
+      auto iy = int((position.y - minY) * dBucketInv) + 1;
+      auto iz = int((position.z - minZ) * dBucketInv) + 1;
       for (auto jz = iz - 1; jz <= iz + 1; jz++) {
         for (auto jy = iy - 1; jy <= iy + 1; jy++) {
           for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-            auto jb = jz * nBxyz + jy * nBx + jx;
+            auto jb = jz * nBxy + jy * nBx + jx;
             auto j = bFst[jb];
             while (j != -1) {
-              auto v = particle[j].position - position;
+              Vector v = particle[j].position - position;
               if (v.size2() < rlim * rlim) {
                 if (j != i && particle[j].type != ghost) {
-                  auto fDtVec = (velocity - particle[j].velocity) * v;
-                  auto fDt = fDtVec.x + fDtVec.y + fDtVec.z;
+                  auto fDt = (velocity - particle[j].velocity).dot(v);
                   if (fDt > 0.0) {
                     auto mj = dns[particle[j].type];
                     fDt *= col * mj / (mi + mj) / v.size2();
@@ -295,23 +268,6 @@ void checkCollision() {
           }
         }
       }
-      // bucketLoop(
-      //     [&](int j) {
-      //       Vector v = particle[j].position - position;
-      //       if (v.size2() < rlim * rlim) {
-      //         if (j != i && particle[j].type != ghost) {
-      //           auto fDtVec = (velocity - particle[j].velocity) * v;
-      //           auto fDt = fDtVec.x + fDtVec.y + fDtVec.z;
-      //           if (fDt > 0.0) {
-      //             auto mj = dns[particle[j].type];
-      //             fDt *= col * mj / (mi + mj) / v.size2();
-      //             particle[i].acceleration -= v * fDt;
-      //           }
-      //         }
-      //       }
-      //     },
-      //     position);
-      // particle[i].acceleration = velocity2;
     }
   }
   for (auto i = 0; i < numberOfParticles; i++) {
@@ -324,16 +280,16 @@ void makePressure() {
     if (particle[i].type != ghost) {
       auto position = particle[i].position;
       auto ni = 0.0;
-      auto ix = int((position.x - minX) / dBucket) + 1;
-      auto iy = int((position.y - minY) / dBucket) + 1;
-      auto iz = int((position.z - minZ) / dBucket) + 1;
+      auto ix = int((position.x - minX) * dBucketInv) + 1;
+      auto iy = int((position.y - minY) * dBucketInv) + 1;
+      auto iz = int((position.z - minZ) * dBucketInv) + 1;
       for (auto jz = iz - 1; jz <= iz + 1; jz++) {
         for (auto jy = iy - 1; jy <= iy + 1; jy++) {
           for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-            auto jb = jz * nBxyz + jy * nBx + jx;
+            auto jb = jz * nBxy + jy * nBx + jx;
             auto j = bFst[jb];
             while (j != -1) {
-              auto v = particle[j].position - position;
+              Vector v = particle[j].position - position;
               if (v.size2() < r * r) {
                 if (j != i && particle[j].type != ghost) {
                   ni += weight(v.size(), r);
@@ -344,16 +300,6 @@ void makePressure() {
           }
         }
       }
-      // bucketLoop(
-      //     [&](int j) {
-      //       Vector v = particle[j].position - position;
-      //       if (v.size2() < r * r) {
-      //         if (j != i && particle[j].type != ghost) {
-      //           ni += weight(v.size(), r);
-      //         }
-      //       }
-      //     },
-      //     position);
       auto mi = dns[particle[i].type];
       particle[i].pressure = (ni > n0) * (ni - n0) * a2 * mi;
     }
@@ -366,16 +312,16 @@ void pressureGradTerm() {
       auto acceleration = Vector();
       auto position = particle[i].position;
       auto minPressure = particle[i].pressure;
-      auto ix = int((position.x - minX) / dBucket) + 1;
-      auto iy = int((position.y - minY) / dBucket) + 1;
-      auto iz = int((position.z - minZ) / dBucket) + 1;
+      auto ix = int((position.x - minX) * dBucketInv) + 1;
+      auto iy = int((position.y - minY) * dBucketInv) + 1;
+      auto iz = int((position.z - minZ) * dBucketInv) + 1;
       for (auto jz = iz - 1; jz <= iz + 1; jz++) {
         for (auto jy = iy - 1; jy <= iy + 1; jy++) {
           for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-            auto jb = jz * nBxyz + jy * nBx + jx;
+            auto jb = jz * nBxy + jy * nBx + jx;
             auto j = bFst[jb];
             while (j != -1) {
-              auto v = particle[j].position - position;
+              Vector v = particle[j].position - position;
               if (v.size2() < r * r) {
                 if (j != i && particle[j].type != ghost) {
                   if (minPressure > particle[j].pressure)
@@ -390,14 +336,15 @@ void pressureGradTerm() {
       for (auto jz = iz - 1; jz <= iz + 1; jz++) {
         for (auto jy = iy - 1; jy <= iy + 1; jy++) {
           for (auto jx = ix - 1; jx <= ix + 1; jx++) {
-            auto jb = jz * nBxyz + jy * nBx + jx;
+            auto jb = jz * nBxy + jy * nBx + jx;
             auto j = bFst[jb];
             while (j != -1) {
-              auto v = particle[j].position - position;
+              Vector v = particle[j].position - position;
               if (v.size2() < r * r) {
                 if (j != i && particle[j].type != ghost) {
-                  if (minPressure > particle[j].pressure)
-                    minPressure = particle[j].pressure;
+                  auto w = weight(v.size(), r) *
+                           (particle[j].pressure - minPressure) / v.size2();
+                  acceleration += v * w;
                 }
               }
               j = nxt[j];
@@ -405,29 +352,6 @@ void pressureGradTerm() {
           }
         }
       }
-      // bucketLoop(
-      //     [&](int j) {
-      //       Vector v = particle[j].position - position;
-      //       if (v.size2() < r * r) {
-      //         if (j != i && particle[j].type != ghost) {
-      //           if (minPressure > particle[j].pressure)
-      //             minPressure = particle[j].pressure;
-      //         }
-      //       }
-      //     },
-      //     position);
-      // bucketLoop(
-      //     [&](int j) {
-      //       Vector v = particle[j].position - position;
-      //       if (v.size2() < r * r) {
-      //         if (j != i && particle[j].type != ghost) {
-      //           auto w = weight(v.size(), r);
-      //           w *= (particle[j].pressure - minPressure) / v.size2();
-      //           acceleration += v * w;
-      //         }
-      //       }
-      //     },
-      //     position);
       particle[i].acceleration = acceleration * invDns[fluid] * a3;
     }
   }
@@ -447,7 +371,7 @@ void updateParticle2() {
 void calcEmps() {
   while (1) {
     if (loopTime % 100 == 0) {
-      pNum = 0;
+      auto pNum = 0;
       for (auto i = 0; i < numberOfParticles; i++) {
         if (particle[i].type != ghost)
           pNum++;
@@ -488,6 +412,5 @@ int main(int argc, char **argv) {
   Mps::calcEmps();
   auto timerEnd = std::chrono::system_clock::now();
   printf("Total: %13.6lf sec\n",
-         std::chrono::duration_cast<std::chrono::seconds>(timerEnd - timerStart)
-             .count());
+         std::chrono::duration<double>(timerEnd - timerStart).count());
 }

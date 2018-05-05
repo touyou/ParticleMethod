@@ -149,8 +149,7 @@ void simulate() {
     timeStep++;
     simTime += dt;
     if (timeStep % outputInterval == 0) {
-      printf("TimeStepNumber: %4d Time: %lf(s) TimeStamp: %lf(s)\n", timeStep,
-             simTime);
+      printf("TimeStepNumber: %4d Time: %lf(s)\n", timeStep, simTime);
       writeData();
     }
 
@@ -555,8 +554,7 @@ int main(int argc, char **argv) {
   Mps::simulate();
   auto timerEnd = std::chrono::system_clock::now();
   printf("Total: %13.6lf sec\n",
-         std::chrono::duration_cast<std::chrono::seconds>(timerEnd - timerStart)
-             .count());
+         std::chrono::duration<double>(timerEnd - timerStart).count());
   printf("*** END ***\n\n");
   return 0;
 }
