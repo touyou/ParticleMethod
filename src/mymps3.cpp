@@ -19,7 +19,7 @@ const int optFrequency = 100;
 // クーラン条件数
 const double courantNumber = 0.1;
 // 動粘性係数
-const double kinematicViscosity = 1.0e-6;
+const double kinematicViscosity = 0.000001;
 // 次元数
 const int dimension = 3;
 // 音速
@@ -33,7 +33,7 @@ const double distLimitRate = 0.9;
 const double collisionRate = 0.2;
 const Vector gravity = Vector(0.0, 0.0, -9.8);
 const double dt = 0.0005;
-const double finishTime = 1.0;
+const double finishTime = 2.0;
 
 /// variable
 
