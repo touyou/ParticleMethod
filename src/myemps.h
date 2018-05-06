@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
 
-namespace Mps {
+namespace Emps {
 // Type
 enum Type { ghost = -1, fluid = 0, wall = 1, dummy = 2 };
-enum Condition { immovable, surface, inner };
-enum CheckCondition { ignored, connected, noconnect, checked };
 
 // Original Vector Structure
 class Vector {
@@ -68,19 +66,13 @@ public:
   Vector position;
   Vector velocity;
   Vector acceleration;
-  double pressure, minPressure;
-  double numberDensity;
+  double pressure;
+  double avgPressure;
   Type type;
-  Condition boundaryCondition;
-  double sourceTerm;
-  CheckCondition flagCondition;
 
   Particle()
       : position(Vector(0, 0, 0)), velocity(Vector(0, 0, 0)),
-        acceleration(Vector(0, 0, 0)), pressure(0.0), minPressure(0.0),
-        numberDensity(0.0), type(wall), boundaryCondition(immovable),
-        sourceTerm(0.0), flagCondition(ignored) {}
-
+        acceleration(Vector(0, 0, 0)), pressure(0.0), type(wall) {}
   ~Particle() = default;
 };
-}; // namespace Mps
+}; // namespace Emps

@@ -1,6 +1,6 @@
-#include "mymps.h"
+#include "myemps.h"
 
-namespace Mps {
+namespace Emps {
 
 /// constant
 
@@ -401,16 +401,16 @@ void calcEmps() {
   }
 }
 
-}; // namespace Mps
+}; // namespace Emps
 
 int main(int argc, char **argv) {
   printf("*** START EMPS ***\n");
-  Mps::readDat();
-  Mps::analysisBucket();
-  Mps::setParameter();
+  Emps::readDat();
+  Emps::analysisBucket();
+  Emps::setParameter();
 
   auto timerStart = std::chrono::system_clock::now();
-  Mps::calcEmps();
+  Emps::calcEmps();
   auto timerEnd = std::chrono::system_clock::now();
   printf("Total: %13.6lf sec\n",
          std::chrono::duration<double>(timerEnd - timerStart).count());
