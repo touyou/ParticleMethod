@@ -20,6 +20,7 @@ const int optFrequency = 100;
 const double courantNumber = 0.1;
 // 動粘性係数
 const double kinematicViscosity = 0.000001;
+// const double kinematicViscosity = 0.005;
 // 次元数
 const int dimension = 3;
 // 音速
