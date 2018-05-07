@@ -6,35 +6,35 @@ namespace Emps {
 
 const char *fileName = "dambreak.prof";
 // 粒子間距離
-const double particleDistance = 0.02;
+constexpr double particleDistance = 0.02;
 // 解析方向の制限
-const double maxX = 1.0 + particleDistance * 3;
-const double maxY = 0.2 + particleDistance * 3;
-const double maxZ = 0.6 + particleDistance * 30;
-const double minX = -particleDistance * 3;
-const double minY = -particleDistance * 3;
-const double minZ = -particleDistance * 3;
+constexpr double maxX = 1.0 + particleDistance * 3;
+constexpr double maxY = 0.2 + particleDistance * 3;
+constexpr double maxZ = 0.6 + particleDistance * 30;
+constexpr double minX = -particleDistance * 3;
+constexpr double minY = -particleDistance * 3;
+constexpr double minZ = -particleDistance * 3;
 // 出力間隔を決める反復数
-const int optFrequency = 100;
+constexpr int optFrequency = 100;
 // クーラン条件数
-const double courantNumber = 0.1;
+constexpr double courantNumber = 0.1;
 // 動粘性係数
-const double kinematicViscosity = 0.000001;
+constexpr double kinematicViscosity = 0.000001;
 // const double kinematicViscosity = 0.005;
 // 次元数
-const int dimension = 3;
+constexpr int dimension = 3;
 // 音速
-const double sound = 22.0;
+constexpr double sound = 22.0;
 // 粒子の密度
-const int dnsFluid = 1000;
-const int dnsWall = 1000;
+constexpr int dnsFluid = 1000;
+constexpr int dnsWall = 1000;
 // 接近を許さない距離
-const double distLimitRate = 0.9;
+constexpr double distLimitRate = 0.9;
 // 反発率
-const double collisionRate = 0.2;
+constexpr double collisionRate = 0.2;
 const Vector gravity = Vector(0.0, 0.0, -9.8);
-const double dt = 0.0005;
-const double finishTime = 2.0;
+constexpr double dt = 0.0005;
+constexpr double finishTime = 2.0;
 
 /// variable
 
