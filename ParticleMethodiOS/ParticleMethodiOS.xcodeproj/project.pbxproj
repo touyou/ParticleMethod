@@ -1,0 +1,499 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46575A9F20A90C0700B03CF9 /* illust-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 46575A9E20A90C0700B03CF9 /* illust-1.png */; };
+		46575AA220A91BDF00B03CF9 /* Particle.h in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC4B20A560E200F3DA54 /* Particle.h */; };
+		46575AA320A91BDF00B03CF9 /* MakeBucket.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC1D20A287BE00F3DA54 /* MakeBucket.metal */; };
+		46575AA420A91BDF00B03CF9 /* ViscosityTerm.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC4C20A561C200F3DA54 /* ViscosityTerm.metal */; };
+		46575AA520A91BDF00B03CF9 /* UpdateParticle.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC4E20A561EF00F3DA54 /* UpdateParticle.metal */; };
+		46575AA620A91BDF00B03CF9 /* CheckCollision.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5020A5622100F3DA54 /* CheckCollision.metal */; };
+		46575AA720A91BDF00B03CF9 /* MakePressure.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5220A5623E00F3DA54 /* MakePressure.metal */; };
+		46575AA820A91BDF00B03CF9 /* PressureGradTerm.metal in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5420A5626700F3DA54 /* PressureGradTerm.metal */; };
+		46575AA920A91BDF00B03CF9 /* InitializeState.metal in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9420A8203300B03CF9 /* InitializeState.metal */; };
+		46575AAA20A91BDF00B03CF9 /* Visualize.metal in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9220A8181100B03CF9 /* Visualize.metal */; };
+		46575AAB20A91BDF00B03CF9 /* ClearParam.metal in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9620A8204200B03CF9 /* ClearParam.metal */; };
+		46575AAC20A91BEC00B03CF9 /* MTLBuffer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC2320A4427200F3DA54 /* MTLBuffer+Extensions.swift */; };
+		46575AAD20A91BEC00B03CF9 /* MTLDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC6720A5708700F3DA54 /* MTLDevice+Extensions.swift */; };
+		46575AAE20A91BEC00B03CF9 /* ShaderCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC2120A4417800F3DA54 /* ShaderCommand.swift */; };
+		46575AAF20A91BEC00B03CF9 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC1F20A287FF00F3DA54 /* Renderer.swift */; };
+		46575AB020A91BEC00B03CF9 /* Renderer+Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC4520A5603500F3DA54 /* Renderer+Simulator.swift */; };
+		46575AB120A91BEC00B03CF9 /* Fluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC6320A5695100F3DA54 /* Fluid.swift */; };
+		46575AB220A91BEC00B03CF9 /* Slab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC6520A5703F00F3DA54 /* Slab.swift */; };
+		46575AB320A91BEC00B03CF9 /* DispatchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9020A7EDEC00B03CF9 /* DispatchConfig.swift */; };
+		46575AB420A91BEC00B03CF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC0B20A286DD00F3DA54 /* AppDelegate.swift */; };
+		46575AB520A91BEC00B03CF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC0D20A286DD00F3DA54 /* ViewController.swift */; };
+		46575AB620A91D9500B03CF9 /* MakeBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5720A563E700F3DA54 /* MakeBucket.swift */; };
+		46575AB720A91D9500B03CF9 /* ViscosityTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5920A563F100F3DA54 /* ViscosityTerm.swift */; };
+		46575AB820A91D9500B03CF9 /* UpdateParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5B20A563FA00F3DA54 /* UpdateParticle.swift */; };
+		46575AB920A91D9500B03CF9 /* UpdateParticle2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46575AA020A91B4300B03CF9 /* UpdateParticle2.swift */; };
+		46575ABA20A91D9500B03CF9 /* CheckCollision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5D20A5640400F3DA54 /* CheckCollision.swift */; };
+		46575ABB20A91D9500B03CF9 /* MakePressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC5F20A5640D00F3DA54 /* MakePressure.swift */; };
+		46575ABC20A91D9500B03CF9 /* PressureGradTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467CCC6120A5641800F3DA54 /* PressureGradTerm.swift */; };
+		46575ABD20A91D9500B03CF9 /* InitializeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9820A820BA00B03CF9 /* InitializeState.swift */; };
+		46575ABE20A91D9500B03CF9 /* Visualize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9A20A820C200B03CF9 /* Visualize.swift */; };
+		46575ABF20A91D9500B03CF9 /* ClearParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46575A9C20A820CC00B03CF9 /* ClearParam.swift */; };
+		46575AC120A91FA800B03CF9 /* Utility.metal in Sources */ = {isa = PBXBuildFile; fileRef = 46575AC020A91FA800B03CF9 /* Utility.metal */; };
+		467CCC1120A286DD00F3DA54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 467CCC0F20A286DD00F3DA54 /* Main.storyboard */; };
+		467CCC1320A286DE00F3DA54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 467CCC1220A286DE00F3DA54 /* Assets.xcassets */; };
+		467CCC1620A286DE00F3DA54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 467CCC1420A286DE00F3DA54 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		46575A9020A7EDEC00B03CF9 /* DispatchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchConfig.swift; sourceTree = "<group>"; };
+		46575A9220A8181100B03CF9 /* Visualize.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Visualize.metal; sourceTree = "<group>"; };
+		46575A9420A8203300B03CF9 /* InitializeState.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = InitializeState.metal; sourceTree = "<group>"; };
+		46575A9620A8204200B03CF9 /* ClearParam.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ClearParam.metal; sourceTree = "<group>"; };
+		46575A9820A820BA00B03CF9 /* InitializeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializeState.swift; sourceTree = "<group>"; };
+		46575A9A20A820C200B03CF9 /* Visualize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize.swift; sourceTree = "<group>"; };
+		46575A9C20A820CC00B03CF9 /* ClearParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearParam.swift; sourceTree = "<group>"; };
+		46575A9E20A90C0700B03CF9 /* illust-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "illust-1.png"; sourceTree = "<group>"; };
+		46575AA020A91B4300B03CF9 /* UpdateParticle2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateParticle2.swift; sourceTree = "<group>"; };
+		46575AC020A91FA800B03CF9 /* Utility.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Utility.metal; sourceTree = "<group>"; };
+		467CCC0820A286DD00F3DA54 /* ParticleMethodiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParticleMethodiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		467CCC0B20A286DD00F3DA54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		467CCC0D20A286DD00F3DA54 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		467CCC1020A286DD00F3DA54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		467CCC1220A286DE00F3DA54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		467CCC1520A286DE00F3DA54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		467CCC1720A286DE00F3DA54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		467CCC1D20A287BE00F3DA54 /* MakeBucket.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MakeBucket.metal; sourceTree = "<group>"; };
+		467CCC1F20A287FF00F3DA54 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		467CCC2120A4417800F3DA54 /* ShaderCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderCommand.swift; sourceTree = "<group>"; };
+		467CCC2320A4427200F3DA54 /* MTLBuffer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extensions.swift"; sourceTree = "<group>"; };
+		467CCC4520A5603500F3DA54 /* Renderer+Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Renderer+Simulator.swift"; sourceTree = "<group>"; };
+		467CCC4B20A560E200F3DA54 /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		467CCC4C20A561C200F3DA54 /* ViscosityTerm.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ViscosityTerm.metal; sourceTree = "<group>"; };
+		467CCC4E20A561EF00F3DA54 /* UpdateParticle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = UpdateParticle.metal; sourceTree = "<group>"; };
+		467CCC5020A5622100F3DA54 /* CheckCollision.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CheckCollision.metal; sourceTree = "<group>"; };
+		467CCC5220A5623E00F3DA54 /* MakePressure.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MakePressure.metal; sourceTree = "<group>"; };
+		467CCC5420A5626700F3DA54 /* PressureGradTerm.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PressureGradTerm.metal; sourceTree = "<group>"; };
+		467CCC5720A563E700F3DA54 /* MakeBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBucket.swift; sourceTree = "<group>"; };
+		467CCC5920A563F100F3DA54 /* ViscosityTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViscosityTerm.swift; sourceTree = "<group>"; };
+		467CCC5B20A563FA00F3DA54 /* UpdateParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateParticle.swift; sourceTree = "<group>"; };
+		467CCC5D20A5640400F3DA54 /* CheckCollision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCollision.swift; sourceTree = "<group>"; };
+		467CCC5F20A5640D00F3DA54 /* MakePressure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePressure.swift; sourceTree = "<group>"; };
+		467CCC6120A5641800F3DA54 /* PressureGradTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureGradTerm.swift; sourceTree = "<group>"; };
+		467CCC6320A5695100F3DA54 /* Fluid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fluid.swift; sourceTree = "<group>"; };
+		467CCC6520A5703F00F3DA54 /* Slab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slab.swift; sourceTree = "<group>"; };
+		467CCC6720A5708700F3DA54 /* MTLDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLDevice+Extensions.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		467CCC0520A286DD00F3DA54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		467CCBFF20A286DD00F3DA54 = {
+			isa = PBXGroup;
+			children = (
+				467CCC0A20A286DD00F3DA54 /* ParticleMethodiOS */,
+				467CCC0920A286DD00F3DA54 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		467CCC0920A286DD00F3DA54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC0820A286DD00F3DA54 /* ParticleMethodiOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		467CCC0A20A286DD00F3DA54 /* ParticleMethodiOS */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC4A20A560A100F3DA54 /* Extensions */,
+				467CCC4920A5609800F3DA54 /* Protocols */,
+				467CCC4820A5608600F3DA54 /* Shader */,
+				467CCC5620A5629300F3DA54 /* ShaderCommand */,
+				467CCC4720A5607A00F3DA54 /* Renderer */,
+				467CCC0B20A286DD00F3DA54 /* AppDelegate.swift */,
+				467CCC0D20A286DD00F3DA54 /* ViewController.swift */,
+				467CCC0F20A286DD00F3DA54 /* Main.storyboard */,
+				467CCC1220A286DE00F3DA54 /* Assets.xcassets */,
+				46575A9E20A90C0700B03CF9 /* illust-1.png */,
+				467CCC1420A286DE00F3DA54 /* LaunchScreen.storyboard */,
+				467CCC1720A286DE00F3DA54 /* Info.plist */,
+			);
+			path = ParticleMethodiOS;
+			sourceTree = "<group>";
+		};
+		467CCC4720A5607A00F3DA54 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC1F20A287FF00F3DA54 /* Renderer.swift */,
+				467CCC4520A5603500F3DA54 /* Renderer+Simulator.swift */,
+				467CCC6320A5695100F3DA54 /* Fluid.swift */,
+				467CCC6520A5703F00F3DA54 /* Slab.swift */,
+				46575A9020A7EDEC00B03CF9 /* DispatchConfig.swift */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		467CCC4820A5608600F3DA54 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC4B20A560E200F3DA54 /* Particle.h */,
+				467CCC1D20A287BE00F3DA54 /* MakeBucket.metal */,
+				467CCC4C20A561C200F3DA54 /* ViscosityTerm.metal */,
+				467CCC4E20A561EF00F3DA54 /* UpdateParticle.metal */,
+				467CCC5020A5622100F3DA54 /* CheckCollision.metal */,
+				467CCC5220A5623E00F3DA54 /* MakePressure.metal */,
+				467CCC5420A5626700F3DA54 /* PressureGradTerm.metal */,
+				46575A9420A8203300B03CF9 /* InitializeState.metal */,
+				46575A9220A8181100B03CF9 /* Visualize.metal */,
+				46575A9620A8204200B03CF9 /* ClearParam.metal */,
+				46575AC020A91FA800B03CF9 /* Utility.metal */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		467CCC4920A5609800F3DA54 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC2120A4417800F3DA54 /* ShaderCommand.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		467CCC4A20A560A100F3DA54 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC2320A4427200F3DA54 /* MTLBuffer+Extensions.swift */,
+				467CCC6720A5708700F3DA54 /* MTLDevice+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		467CCC5620A5629300F3DA54 /* ShaderCommand */ = {
+			isa = PBXGroup;
+			children = (
+				467CCC5720A563E700F3DA54 /* MakeBucket.swift */,
+				467CCC5920A563F100F3DA54 /* ViscosityTerm.swift */,
+				467CCC5B20A563FA00F3DA54 /* UpdateParticle.swift */,
+				46575AA020A91B4300B03CF9 /* UpdateParticle2.swift */,
+				467CCC5D20A5640400F3DA54 /* CheckCollision.swift */,
+				467CCC5F20A5640D00F3DA54 /* MakePressure.swift */,
+				467CCC6120A5641800F3DA54 /* PressureGradTerm.swift */,
+				46575A9820A820BA00B03CF9 /* InitializeState.swift */,
+				46575A9A20A820C200B03CF9 /* Visualize.swift */,
+				46575A9C20A820CC00B03CF9 /* ClearParam.swift */,
+			);
+			path = ShaderCommand;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		467CCC0720A286DD00F3DA54 /* ParticleMethodiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 467CCC1A20A286DE00F3DA54 /* Build configuration list for PBXNativeTarget "ParticleMethodiOS" */;
+			buildPhases = (
+				467CCC0420A286DD00F3DA54 /* Sources */,
+				467CCC0520A286DD00F3DA54 /* Frameworks */,
+				467CCC0620A286DD00F3DA54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParticleMethodiOS;
+			productName = ParticleMethodiOS;
+			productReference = 467CCC0820A286DD00F3DA54 /* ParticleMethodiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		467CCC0020A286DD00F3DA54 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = touyou;
+				TargetAttributes = {
+					467CCC0720A286DD00F3DA54 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 467CCC0320A286DD00F3DA54 /* Build configuration list for PBXProject "ParticleMethodiOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 467CCBFF20A286DD00F3DA54;
+			productRefGroup = 467CCC0920A286DD00F3DA54 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				467CCC0720A286DD00F3DA54 /* ParticleMethodiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		467CCC0620A286DD00F3DA54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				467CCC1620A286DE00F3DA54 /* LaunchScreen.storyboard in Resources */,
+				467CCC1320A286DE00F3DA54 /* Assets.xcassets in Resources */,
+				46575A9F20A90C0700B03CF9 /* illust-1.png in Resources */,
+				467CCC1120A286DD00F3DA54 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		467CCC0420A286DD00F3DA54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46575AB620A91D9500B03CF9 /* MakeBucket.swift in Sources */,
+				46575AB720A91D9500B03CF9 /* ViscosityTerm.swift in Sources */,
+				46575AB820A91D9500B03CF9 /* UpdateParticle.swift in Sources */,
+				46575AB920A91D9500B03CF9 /* UpdateParticle2.swift in Sources */,
+				46575ABA20A91D9500B03CF9 /* CheckCollision.swift in Sources */,
+				46575ABB20A91D9500B03CF9 /* MakePressure.swift in Sources */,
+				46575ABC20A91D9500B03CF9 /* PressureGradTerm.swift in Sources */,
+				46575ABD20A91D9500B03CF9 /* InitializeState.swift in Sources */,
+				46575ABE20A91D9500B03CF9 /* Visualize.swift in Sources */,
+				46575ABF20A91D9500B03CF9 /* ClearParam.swift in Sources */,
+				46575AAC20A91BEC00B03CF9 /* MTLBuffer+Extensions.swift in Sources */,
+				46575AAD20A91BEC00B03CF9 /* MTLDevice+Extensions.swift in Sources */,
+				46575AAE20A91BEC00B03CF9 /* ShaderCommand.swift in Sources */,
+				46575AAF20A91BEC00B03CF9 /* Renderer.swift in Sources */,
+				46575AB020A91BEC00B03CF9 /* Renderer+Simulator.swift in Sources */,
+				46575AB120A91BEC00B03CF9 /* Fluid.swift in Sources */,
+				46575AB220A91BEC00B03CF9 /* Slab.swift in Sources */,
+				46575AB320A91BEC00B03CF9 /* DispatchConfig.swift in Sources */,
+				46575AB420A91BEC00B03CF9 /* AppDelegate.swift in Sources */,
+				46575AB520A91BEC00B03CF9 /* ViewController.swift in Sources */,
+				46575AA220A91BDF00B03CF9 /* Particle.h in Sources */,
+				46575AC120A91FA800B03CF9 /* Utility.metal in Sources */,
+				46575AA320A91BDF00B03CF9 /* MakeBucket.metal in Sources */,
+				46575AA420A91BDF00B03CF9 /* ViscosityTerm.metal in Sources */,
+				46575AA520A91BDF00B03CF9 /* UpdateParticle.metal in Sources */,
+				46575AA620A91BDF00B03CF9 /* CheckCollision.metal in Sources */,
+				46575AA720A91BDF00B03CF9 /* MakePressure.metal in Sources */,
+				46575AA820A91BDF00B03CF9 /* PressureGradTerm.metal in Sources */,
+				46575AA920A91BDF00B03CF9 /* InitializeState.metal in Sources */,
+				46575AAA20A91BDF00B03CF9 /* Visualize.metal in Sources */,
+				46575AAB20A91BDF00B03CF9 /* ClearParam.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		467CCC0F20A286DD00F3DA54 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				467CCC1020A286DD00F3DA54 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		467CCC1420A286DE00F3DA54 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				467CCC1520A286DE00F3DA54 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		467CCC1820A286DE00F3DA54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		467CCC1920A286DE00F3DA54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		467CCC1B20A286DE00F3DA54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B4S4333JDW;
+				INFOPLIST_FILE = ParticleMethodiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.touyou.ParticleMethodiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		467CCC1C20A286DE00F3DA54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B4S4333JDW;
+				INFOPLIST_FILE = ParticleMethodiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.touyou.ParticleMethodiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		467CCC0320A286DD00F3DA54 /* Build configuration list for PBXProject "ParticleMethodiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				467CCC1820A286DE00F3DA54 /* Debug */,
+				467CCC1920A286DE00F3DA54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		467CCC1A20A286DE00F3DA54 /* Build configuration list for PBXNativeTarget "ParticleMethodiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				467CCC1B20A286DE00F3DA54 /* Debug */,
+				467CCC1C20A286DE00F3DA54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 467CCC0020A286DD00F3DA54 /* Project object */;
+}
